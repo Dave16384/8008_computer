@@ -1,0 +1,64 @@
+Name 8008_MB;
+Partno 16V8_U7;
+Revision V3;
+Date 04/09/2024;
+Designer Jim Loos, Dave Hanson;
+Company ;
+Location ;
+Assembly ;
+Device G16V8A;
+
+/*  ! = NOT    */
+/*  & = AND    */
+/*  # = OR     */
+/*  $ = XOR    */
+
+/* Inputs: */
+Pin 1 = S0;         /* state signal from 8008 pin 13           */
+Pin 2 = S1;         /* state signal from 8008 pin 12           */
+Pin 3 = S2;         /* state signal from 8008 pin 11           */
+Pin 4 = SYNC;       /* SYNC signal from 8008 pin 14            */
+Pin 5 = CC1;        /* control code from 74LS273 #2 pin 5      */
+Pin 6 = CC2;        /* control code from 74LS273 #2 pin 2      */
+Pin 7 = PHASE1;     /* phase 1 from the clock generator        */
+Pin 8 = PHASE2;     /* phase 2 from the clock generator        */
+
+/* Outputs:   */
+Pin 19 = RUNNING;   /* Output to "Running" LED                 */ 
+Pin 18 = ALL;       /* 74LS273 #1 Address Latch Low strobe     */
+Pin 17 = ALH;       /* 74LS273 #2 Address Latch High strobe    */
+Pin 16 = MEMRD;     /* Memory Read strobe to 28256 and AS7C164 */
+Pin 15 = MEMWR;     /* Memory Write strobe to AS7C164          */
+Pin 14 = IORD;      /* IO Read  to 16V8 #2                     */
+Pin 13 = IOWR;      /* IO Write to 16V8 #2                     */
+Pin 12 = DBD;       /* 74LS245 Data Bus Direction control      */
+
+/* CPU states */
+wait    = !S2 & !S1 & !S0;  /* External memory not ready                 */
+t3      = !S2 & !S1 &  S0;  /* Instruction or data fetch or data out     */
+t1      = !S2 &  S1 & !S0;  /* Lower 8 bits of address out               */
+stopped = !S2 &  S1 &  S0;  /* Halt instruction received by CPU          */
+t2      =  S2 & !S1 & !S0;  /* Higher 6 bits address, 2 bits control out */ 
+t5      =  S2 & !S1 &  S0;  /* Execution of instruction                  */
+t1i     =  S2 &  S1 & !S0;  /* CPU interrupted                           */
+t4      =  S2 &  S1 &  S0;  /* Execution of instruction                  */
+
+/* CPU cycle types */
+pci = !CC1 & !CC2;  /* Memory Read Instruction */
+pcr = !CC1 &  CC2;  /* Memory Read Additional  */
+pcc =  CC1 & !CC2;  /* I/O Operation           */
+pcw =  CC1 &  CC2;  /* Memory Write            */
+
+RUNNING = stopped;
+
+/* address and data bus */
+DBD = (t1 # t1i # t2 # t3) & !SYNC;
+ALL = (t1 # t1i) & !SYNC & PHASE2;
+ALH = t2 & !SYNC & PHASE2;
+
+/* memory and I/O strobes */
+!MEMRD = t3 & (pci # pcr) & SYNC;
+!MEMWR = t3 & pcw & !SYNC & PHASE2;
+
+!IORD  = t3 & pcc & SYNC;
+!IOWR  = t3 & pcc & !SYNC & PHASE1;

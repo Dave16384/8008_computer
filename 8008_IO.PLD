@@ -1,0 +1,67 @@
+Name 8008_IO;
+Partno 16V8;
+Revision;
+Date 04/20/2024;
+Designer Dave Hanson;
+Company ;
+Location ;
+Assembly ;
+Device G16V8A;
+
+/* Inputs: */
+Pin 1  = IORD;
+Pin 2  = IOWR;
+Pin 3  = A9;
+Pin 4  = A10;
+Pin 5  = A11;
+Pin 6  = A12;
+Pin 7  = A13;
+Pin 8  = RESET;
+
+/* Outputs:  */
+Pin 19 = OUT18;     /* Output port c  */
+Pin 18 = OUT19;     /* Output port d  */
+Pin 17 =  INP5;     /*  Input port a  */  
+Pin 16 =  INP4;     /*  Input port b  */  
+ 
+/* Comment/uncomment lines for the port numbers intended to be assigned on the I/O board         */
+/* TTYIN/TTYOUT and MEMORY MAPPER port assignments are fixed and are included here for reference */
+/* Note: SCELBAL uses hexadecimal port numbers                                                   */
+/*                                                                                               */
+/*!INP0 = !A13 & !A12 & !A11 & !A10 & !A9 & !IORD;*/  /*  Input port 0  00000 0x00 TTYIN         */
+/*!INP1 = !A13 & !A12 & !A11 & !A10 &  A9 & !IORD;*/  /*  Input port 1  00001 0x01 MEMORY MAPPER */
+/*!INP2 = !A13 & !A12 & !A11 &  A10 & !A9 & !IORD;*/  /*  Input port 2  00010 0x02               */
+/*!INP3 = !A13 & !A12 & !A11 &  A10 &  A9 & !IORD;*/  /*  Input port 3  00011 0x03               */
+!INP4   = !A13 & !A12 &  A11 & !A10 & !A9 & !IORD;    /*  Input port 4  00100 0x04 I/O BOARD 2   */
+!INP5   = !A13 & !A12 &  A11 & !A10 &  A9 & !IORD;    /*  Input port 5  00101 0x05 I/O BOARD 2   */
+/*!INP6 = !A13 & !A12 &  A11 &  A10 & !A9 & !IORD;*/  /*  Input port 6  00110 0x06 I/O BOARD 1   */
+/*!INP7 = !A13 & !A12 &  A11 &  A10 &  A9 & !IORD;*/  /*  Input port 7  00111 0x07 I/O BOARD 1   */
+
+/*OUT8  = !A13 &  A12 & !A11 & !A10 & !A9 & !IOWR;*/  /* Output port 8  01000 0x08 TTYOUT        */
+/*OUT9  = !A13 &  A12 & !A11 & !A10 &  A9 & !IOWR;*/  /* Output port 9  01001 0x09               */
+/*OUT10 = !A13 &  A12 & !A11 &  A10 & !A9 & !IOWR;*/  /* Output port 10 01010 0x0a MEMORY MAPPER */
+/*OUT11 = !A13 &  A12 & !A11 &  A10 &  A9 & !IOWR;*/  /* Output port 11 01011 0x0b               */
+/*OUT12 = !A13 &  A12 &  A11 & !A10 & !A9 & !IOWR;*/  /* Output port 12 01100 0x0c               */
+/*OUT13 = !A13 &  A12 &  A11 & !A10 &  A9 & !IOWR;*/  /* Output port 13 01101 0x0d               */
+/*OUT14 = !A13 &  A12 &  A11 &  A10 & !A9 & !IOWR;*/  /* Output port 14 01110 0x0e               */
+/*OUT15 = !A13 &  A12 &  A11 &  A10 &  A9 & !IOWR;*/  /* Output port 15 01111 0x0f               */
+
+/*OUT16 =  A13 & !A12 & !A11 & !A10 & !A9 & !IOWR;*/  /* Output port 16 10000 0x10 I/O BOARD 1   */
+/*OUT17 =  A13 & !A12 & !A11 & !A10 &  A9 & !IOWR;*/  /* Output port 17 10001 0x11 I/O BOARD 1   */
+OUT18   =  A13 & !A12 & !A11 &  A10 & !A9 & !IOWR;    /* Output port 18 10010 0x12 I/O BOARD 2   */
+OUT19   =  A13 & !A12 & !A11 &  A10 &  A9 & !IOWR;    /* Output port 19 10011 0x13 I/O BOARD 2   */
+/*OUT20 =  A13 & !A12 &  A11 & !A10 & !A9 & !IOWR;*/  /* Output port 20 10100 0x14               */
+/*OUT21 =  A13 & !A12 &  A11 & !A10 &  A9 & !IOWR;*/  /* Output port 21 10101 0x15               */
+/*OUT22 =  A13 & !A12 &  A11 &  A10 & !A9 & !IOWR;*/  /* Output port 22 10110 0x16               */
+/*OUT23 =  A13 & !A12 &  A11 &  A10 &  A9 & !IOWR;*/  /* Output port 23 10111 0x17               */
+
+/*OUT24 =  A13 &  A12 & !A11 & !A10 & !A9 & !IOWR;*/  /* Output port 24 11000 0x18               */
+/*OUT25 =  A13 &  A12 & !A11 & !A10 &  A9 & !IOWR;*/  /* Output port 25 11001 0x19               */
+/*OUT26 =  A13 &  A12 & !A11 &  A10 & !A9 & !IOWR;*/  /* Output port 26 11010 0x1a               */
+/*OUT27 =  A13 &  A12 & !A11 &  A10 &  A9 & !IOWR;*/  /* Output port 27 11011 0x1b               */
+/*OUT28 =  A13 &  A12 &  A11 & !A10 & !A9 & !IOWR;*/  /* Output port 28 11100 0x1c               */
+/*OUT29 =  A13 &  A12 &  A11 & !A10 &  A9 & !IOWR;*/  /* Output port 29 11101 0x1d               */
+/*OUT30 =  A13 &  A12 &  A11 &  A10 & !A9 & !IOWR;*/  /* Output port 30 11110 0x1e               */
+/*OUT31 =  A13 &  A12 &  A11 &  A10 &  A9 & !IOWR;*/  /* Output port 31 11111 0x1f               */
+
+

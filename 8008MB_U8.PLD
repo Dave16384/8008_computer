@@ -1,0 +1,83 @@
+Name 8008_MB;
+Partno 22V10_U8;
+Revision V3;
+Date 04/09/2024;
+Designer Jim Loos, Dave Hanson;
+Company ;
+Location ;
+Assembly ;
+Device G22V10;
+
+/*  ! = NOT     */
+/*  & = AND     */
+/*  # = OR      */
+/*  $ = XOR     */
+
+/* Inputs: */
+Pin 1  = IORD;
+Pin 2  = IOWR;
+Pin 3  = A9;
+Pin 4  = A10;
+Pin 5  = A12;
+Pin 6  = A11;
+Pin 7  = A13;
+Pin 8  = RESET;
+Pin 9  = Q3;        /* Q3 output from 74LS75  (output port 10 bit 1) */
+Pin 10 = Q2;        /* Q2 output from 74LS75  (output port 10 bit 0) */
+
+/* Outputs:  */
+Pin 22 = INP1;       /* in1      MEMORY MAPPER */
+Pin 21 = OUTP8;      /* out8     TTYOUT        */
+Pin 20 = INP0;       /* in0      TTYIN         */
+Pin 19 = START;
+Pin 18 = OUTP10;     /* out10    MEMORY MAPPER */  
+Pin 17 = ROMCS;
+Pin 16 = RAMCS;
+Pin 15 = ROMA14;    /* to EPROM address input A14 (for bank switching) */
+Pin 14 = ROMA13;    /* to EPROM address input A13 (for bank switching) */  
+
+/* Input/Output logic: */
+in0  = !A13 & !A12;
+out0 = !A13 &  A12;
+out1 =  A13 & !A12;
+out2 =  A13 &  A12;
+
+device0 = !A11 & !A10 & !A9;
+device1 = !A11 & !A10 &  A9;
+device2 = !A11 &  A10 & !A9;
+device3 = !A11 &  A10 &  A9;
+device4 =  A11 & !A10 & !A9;
+device5 =  A11 & !A10 &  A9;
+device6 =  A11 &  A10 & !A9;
+device7 =  A11 &  A10 &  A9;
+
+!INP0  = in0  & device0 & !IORD;       /* Input port 0      TTYIN          */
+!INP1  = in0  & device1 & !IORD;       /* Input port 1      MEMORY MAPPER  */
+!INP2  = in0  & device2 & !IORD;       /* Input port 2      -unused-       */
+!INP3  = in0  & device3 & !IORD;       /* Input port 3      -unused-       */
+
+OUTP8  = out0 & device0 & !IOWR;       /* Output port 8     TTYOUT         */
+OUTP9  = out0 & device1 & !IOWR;       /* Output port 9     -unused-       */
+OUTP10 = out0 & device2 & !IOWR;       /* Output port 10    MEMORY MAPPER  */
+OUTP11 = out0 & device3 & !IOWR;       /* Output port 11    -unused-       */
+
+/* Simulated SR flip-flop made up of cross-connected NAND gates.           */
+/* The flip-flop is set when the reset signal from the DS1233 goes low     */
+/* (power-on-reset) and cleared when input port 1 is accessed.             */
+/* When set, the flip-flop forces all memory accesses to select the EPROM. */
+/* when reset, the flip-flop permits the normal memory map.                */
+
+START = !RESET # (START & INP1);
+
+/* Memory   */
+!ROMCS =  A13 #  START;     /* 2000-3FFFH           */
+!RAMCS = !A13 & !START;     /* 0000-1FFFH           */
+
+/* When START is high (on power-up and reset), ROMA14 and ROMA13 are low to   */
+/* force the SBC to execute code in the first 8K segment of the EPROM.        */
+/* When START is low, ROMA14 and ROMA13 are controlled  by the Q3 and Q2      */
+/* inputs from port 10, allowing any one of the four 8K sections of the EPROM */
+/* to be selected for code.                                                   */
+ROMA14 = !START & Q3;         /* output to EPROM address line A14 */
+ROMA13 = !START & Q2;         /* output to EPROM address line A13 */
+
