@@ -16,3 +16,7 @@ best forgotten.
 The picture is version 3. I added an I/O bus and small I/O boards, along with some more circuit
 modifications. Version 3.1 will be coming with a few minor tweeks, mostly in the silkscreen.
 
+I measured the temperature of the 8008 as 35 degrees C above still air ambient. Adding the heat sink 
+and fan reduced the temperature rise by 24 degrees C. Much better!
+
+
