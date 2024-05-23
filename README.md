@@ -1,5 +1,3 @@
-Home-brew Intel 8008 computer with monitor and SCELBAL BASIC interpreter in EEPROM. 
-
 For many years I had been interested in building a computer using the the Intel 8008 microprocessor.
 Finally I had the time to revisit my wish. A search turned up Jim Loos' 8008 Single Board Computer.
 Here was working hardware and most importantly, a monitor and a high level language! Jim had built
@@ -15,6 +13,6 @@ I briefly considered wire wrapping the board, but decided that it would be less 
 myself KiCad. The first board worked the first time I turned it on! I made a second version which is 
 best forgotten.
 
-Pictured below is version 3. I added an I/O bus and small I/O boards, along with some more circuit
-modifications.
+The picture is version 3. I added an I/O bus and small I/O boards, along with some more circuit
+modifications. Version 3.1 will be coming with a few minor tweeks, mostly in the silkscreen.
 
