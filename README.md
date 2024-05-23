@@ -1,8 +1,11 @@
 For many years I had been interested in building a computer using the the Intel 8008 microprocessor.
-Finally I had the time to revisit my wish. A search turned up Jim Loos' 8008 Single Board Computer.
-Here was working hardware and most importantly, a monitor and a high level language! Jim had built
-upon the work of Len Bayles's and Jim Kearney's 8008 computers. Credit for resurrecting SCELBAL BASIC
-goes to Mike Willegal. Thank you Alfred Arnold for the AS Macro Assembler.
+Finally I had the time to revisit my wish. A search turned up Jim Loos' 8008 Single Board Computer, 
+https://github.com/jim11662418/8008-SBC. Here was working hardware and most importantly, a monitor 
+and a high level language! Jim had built upon the work of Len Bayles's http://www.8008chron.com and 
+Jim Kearney's 8008 computers https://www.jkearney.com/Tiny8demo. Credit for resurrecting SCELBAL BASIC
+goes to Mike Willegal http://www.willegal.net/scelbi/scelbal.html. Thank you Alfred Arnold for the 
+AS Macro Assembler http://john.ccac.rwth-aachen.de:8000/as/. Also, Dr. Scott Baker www.smbaker.com
+has done some really neat 8008 work!
 
 My first pass was a nearly exact copy of Jim's SBC with some modifications. Some parts were different 
 based on what I had on hand. I chose to use Len Bayle's alternate clock design. Just something about 
